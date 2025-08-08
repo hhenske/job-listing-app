@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./App.css"; // or "./App.scss" if using SCSS
+import data from "./data.json";
 
 function App() {
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState(['Frontend']);
 
   return (
     <div className="app">
@@ -40,12 +41,18 @@ function App() {
               className="company-logo"
             />
             <div className="details">
-              <div className="company">Photosnap</div>
-              <div className="position">Senior Frontend Developer</div>
-              <div className="meta">1d ago • Full Time • USA only</div>
+              <div className="company">
+                <span className="company-name">Company name</span>
+                <span className="company-tags">Company tags rendered dynamically, side by side</span>
+              </div>
+              <div className="position">Position being listed</div>
+              <div className="meta">1d ago • Full Time • USA only
+                <span className="listed-when">1 day ago</span>
+                <span className="listed-type">Full Time</span>
+                <span className="listed-where">Location</span>
+              </div>
             </div>
           </div>
-
           <div className="right">
             <span className="tag">Frontend</span>
             <span className="tag">Senior</span>

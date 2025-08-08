@@ -1,42 +1,155 @@
+:root {
+  --primary-green:  hsl(180, 29%, 50%);
+  --background-green: hsl(180, 52%, 96%);
+  --gray-400: hsl(180, 8%, 52%);
+  --green-900: hsl(180, 14%, 20%);
+  --font-league-500: "League Spartan", sans-serif;
+  --font-league-700: "League Spartan", sans-serif;
+}
+
+
+.league-spartan {
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* 
+- Family: [League Spartan](https://fonts.google.com/specimen/League+Spartan)
+- Weights: 500, 700 */
+
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.html {
+  background-color: var(--background-green);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.header {
+  position: relative;
+  height: 100px;
+  width: 100%;
+  background-color: var(--primary-green);
+}
+
+.header-bg-desktop {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-image: url('/images/bg-header-desktop.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.main {
+  margin-top: 60px;
+  background-color: var(--background-green);
+}
+
+.filter-bar {
+  position: absolute;
+  top: 80px; /* half overlapping */
+  left: 50%;
+  transform: translateX(-50%);
+  background: white; /* or your design color */
+  box-shadow: 0 5px 20px var(--primary-green);
+  padding: 1rem 2rem 1.3rem 2rem;
+  border-radius: 2px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 70%;
+  height: 1rem;
+}
+
+body {
+  font-size: 15px;
+  height: 800px;
+  background-color: var(--background-green);
+}
+
+
+.active-filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.filter-tag {
+  background-color: var(--background-green);
+  color: var(--green-900);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 5px;
+  height: 24px;
+  font-size: 14px;
+  color: var(--primary-green);
+  font-weight: 500;
+}
+
+.filter-tag button {
+  background: var(--primary-green);
+  border: none;
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 0 2px 2px 0;
+  padding: 0 0.5rem;
+  cursor: pointer;
+  height: 100%;
+}
+
+.filter-tag button:hover {
+  background-color:black;
+  font: white;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: var(--primary-green);
+  font-weight: 700;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  text-decoration: underline;
+}
+
+.job-card {
+  margin: 5rem auto 0 auto;
+  background-color: white;
+  box-shadow: 0 5px 20px var(--primary-green);
+  padding: 1rem 2rem 1.3rem 2rem;
+  border-radius: 3px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+  height: 6rem;
+}
+
+
+
+@media (max-width: 768px) {
+  .header-bg-desktop {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
+  .header-bg-mobile {
+    display: block;
+    height: 100px;
+    width: 100%;
+    background-image: url('/images/bg-header-mobile.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
