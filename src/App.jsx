@@ -1,35 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css"; // or "./App.scss" if using SCSS
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [filters, setFilters] = useState([]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      {/* HEADER */}
+      <header className="header">
+        <div className="header-bg-desktop" />
+        <div className="header-bg-mobile" />
+      </header>
+
+      {/* FILTER BAR */}
+      {filters.length > 0 && (
+        <div className="filter-bar">
+          <div className="active-filters">
+            {filters.map((filter, index) => (
+              <div className="filter-tag" key={index}>
+                <span>{filter}</span>
+                <button onClick={() => handleRemoveFilter(filter)}>×</button>
+              </div>
+            ))}
+          </div>
+          <button className="clear-btn" onClick={() => setFilters([])}>
+            Clear
+          </button>
+        </div>
+      )}
+
+      {/* MAIN JOB LISTINGS */}
+      <main className="job-listings">
+        {/* Job Card Example */}
+        <div className="job-card">
+          <div className="left">
+            <img
+              src="/images/photosnap.svg"
+              alt="Photosnap"
+              className="company-logo"
+            />
+            <div className="details">
+              <div className="company">Photosnap</div>
+              <div className="position">Senior Frontend Developer</div>
+              <div className="meta">1d ago • Full Time • USA only</div>
+            </div>
+          </div>
+
+          <div className="right">
+            <span className="tag">Frontend</span>
+            <span className="tag">Senior</span>
+            <span className="tag">HTML</span>
+            <span className="tag">CSS</span>
+            <span className="tag">JavaScript</span>
+          </div>
+        </div>
+
+        {/* Add more job cards dynamically */}
+      </main>
+    </div>
+  );
+
+  function handleRemoveFilter(filterToRemove) {
+    setFilters(filters.filter((f) => f !== filterToRemove));
+  }
 }
 
-export default App
+export default App;
+
