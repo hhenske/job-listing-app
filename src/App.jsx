@@ -3,7 +3,28 @@ import "./App.css"; // or "./App.scss" if using SCSS
 import data from "./data.json";
 
 function App() {
-  const [filters, setFilters] = useState(['Frontend']);
+  const [filters, setFilters] = useState([]);
+
+  const handleAddFilter = (filter) => {
+    if (!filters.includes(filter)) {
+      setFilters([...filters, filter]);
+    }
+  };
+
+  const handleTagClick = (tag) => {
+    handleAddFilter(tag);
+  };
+
+  const handleRemoveFilter = (filterToRemove) => {
+    setFilters(filters.filter((f) => f !== filterToRemove))
+  }
+
+  const filteredJobs = filters.length === 0
+  ? data
+  : data.filter((job) => {
+    const allTags = [job.role, job.level, ...job.languages, ...job.tools];
+    return filters.every((filter) => allTags.includes(filter));
+  });
 
   return (
     <div className="app">
@@ -29,47 +50,54 @@ function App() {
           </button>
         </div>
       )}
+<main className="job-listings">
+  {filteredJobs.map((job) => {
+    const tags = [job.role, job.level, ...job.languages, ...job.tools];
+    return (
+      <div className="job-card" key={job.id}>
+        <img
+          src={job.logo}
+          alt={`${job.company} logo`}
+          className="job-logo"
+        />
 
-      {/* MAIN JOB LISTINGS */}
-      <main className="job-listings">
-        {/* Job Card Example */}
-        <div className="job-card">
-          <div className="left">
-            <img
-              src="/images/photosnap.svg"
-              alt="Photosnap"
-              className="company-logo"
-            />
-            <div className="details">
-              <div className="company">
-                <span className="company-name">Company name</span>
-                <span className="company-tags">Company tags rendered dynamically, side by side</span>
-              </div>
-              <div className="position">Position being listed</div>
-              <div className="meta">1d ago • Full Time • USA only
-                <span className="listed-when">1 day ago</span>
-                <span className="listed-type">Full Time</span>
-                <span className="listed-where">Location</span>
-              </div>
-            </div>
+        <div className="job-info">
+          <div className="job-top-row">
+            <span className="company-name">{job.company}</span>
+            {job.new && <span className="badge new">NEW!</span>}
+            {job.featured && <span className="badge featured">FEATURED</span>}
           </div>
-          <div className="right">
-            <span className="tag">Frontend</span>
-            <span className="tag">Senior</span>
-            <span className="tag">HTML</span>
-            <span className="tag">CSS</span>
-            <span className="tag">JavaScript</span>
+
+          <h2 className="job-position">{job.position}</h2>
+
+          <div className="job-meta">
+            <span>{job.postedAt}</span>
+            <span>•</span>
+            <span>{job.contract}</span>
+            <span>•</span>
+            <span>{job.location}</span>
           </div>
         </div>
 
-        {/* Add more job cards dynamically */}
-      </main>
+        <div className="job-tags">
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className="tag"
+              onClick={() => handleTagClick(tag)}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  })}
+</main>
+
     </div>
   );
 
-  function handleRemoveFilter(filterToRemove) {
-    setFilters(filters.filter((f) => f !== filterToRemove));
-  }
 }
 
 export default App;
