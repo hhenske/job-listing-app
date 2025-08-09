@@ -32,6 +32,7 @@ function App() {
       <header className="header">
         <div className="header-bg-desktop" />
         <div className="header-bg-mobile" />
+        <h1>Find-a-Job.com</h1>
       </header>
 
       {/* FILTER BAR */}
@@ -50,11 +51,15 @@ function App() {
           </button>
         </div>
       )}
+
 <main className="job-listings">
+  <p className="instructions">
+  Click on tags below to filter jobs:
+</p>
   {filteredJobs.map((job) => {
     const tags = [job.role, job.level, ...job.languages, ...job.tools];
     return (
-      <div className="job-card" key={job.id}>
+      <div className={`job-card ${job.featured ? 'featured' : ' '}`} key={job.id}>
         <img
           src={job.logo}
           alt={`${job.company} logo`}
